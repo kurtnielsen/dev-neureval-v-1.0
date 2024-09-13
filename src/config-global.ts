@@ -11,7 +11,7 @@ export type ConfigValue = {
   assetsDir: string;
   isStaticExport: boolean;
   auth: {
-    method: 'jwt' | 'amplify' | 'firebase' | 'supabase' | 'auth0';
+    method: 'supabase';
     skip: boolean;
     redirectPath: string;
   };
@@ -43,7 +43,7 @@ export const CONFIG: ConfigValue = {
    * @method jwt | amplify | firebase | supabase | auth0
    */
   auth: {
-    method: 'jwt',
+    method: 'supabase',
     skip: false,
     redirectPath: paths.dashboard.root,
   },

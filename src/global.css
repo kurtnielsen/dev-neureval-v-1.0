@@ -21,6 +21,11 @@
 *************************************** */
 /* scrollbar */
 @import './components/scrollbar/styles.css';
+@import 'simplebar-react/dist/simplebar.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /** **************************************
 * Baseline
