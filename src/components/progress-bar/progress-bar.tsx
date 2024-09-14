@@ -1,7 +1,7 @@
 'use client';
 
-import './styles.css';
-
+// import './styles.css';
+import { progressbarClasses } from './classes';
 import NProgress from 'nprogress';
 import { Suspense, useEffect } from 'react';
 

@@ -1,6 +1,8 @@
 'use client';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-// ----------------------------------------------------------------------
+
+import { supabase } from 'src/supabaseClient';
+import { setSession } from './utils';
+import { STORAGE_KEY } from './constant';
 
 export type SignInParams = {
   email: string;
@@ -15,55 +17,92 @@ export type SignUpParams = {
 };
 
 /** **************************************
- * Supabase client
- *************************************** */
-const supabase = createClientComponentClient();
-
-/** **************************************
  * Sign in
  *************************************** */
 export const signInWithPassword = async ({ email, password }: SignInParams): Promise<void> => {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-  if (error) {
+    if (error) {
+      console.error('Sign In Error:', error.message);
+      throw new Error(error.message);
+    }
+
+    if (!data.session?.access_token) {
+      console.error('Access token not found in response:', data);
+      throw new Error('Access token not found in response');
+    }
+
+    setSession(data.session.access_token); // Use setSession to handle the access token
+  } catch (error) {
     console.error('Error during sign in:', error);
     throw error;
   }
-
-  if (!data.session?.access_token) {
-    throw new Error('Access token not found in response');
-  }
-
-  // Here you can set the supabase session, which will be handled by supabase-helpers
-  console.log('Signed in successfully with access token:', data.session.access_token);
 };
+
 /** **************************************
  * Sign up
  *************************************** */
-export const signUp = async ({ email, password }: SignUpParams): Promise<void> => {
-  const { data, error } = await supabase.auth.signUp({ email, password });
+export const signUp = async ({
+  email,
+  password,
+  firstName,
+  lastName,
+}: SignUpParams): Promise<void> => {
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { firstName, lastName },
+      },
+    });
 
-  if (error) {
+    if (error) {
+      console.error('Sign Up Error:', error.message);
+      throw new Error(error.message);
+    }
+
+    if (!data.session?.access_token) {
+      console.error('Access token not found in response:', data);
+      throw new Error('Access token not found in response');
+    }
+
+    sessionStorage.setItem(STORAGE_KEY, data.session.access_token); // Use the STORAGE_KEY defined for Supabase
+  } catch (error) {
     console.error('Error during sign up:', error);
     throw error;
   }
-
-  if (!data.session?.access_token) {
-    throw new Error('Access token not found in response');
-  }
-
-  sessionStorage.setItem('supabase.auth.token', data.session.access_token);
 };
+
 /** **************************************
  * Sign out
  *************************************** */
 export const signOut = async (): Promise<void> => {
-  const { error } = await supabase.auth.signOut();
+  try {
+    const { error } = await supabase.auth.signOut();
 
-  if (error) {
+    if (error) {
+      console.error('Sign Out Error:', error.message);
+      throw new Error(error.message);
+    }
+
+    console.log('Signed out successfully');
+    setSession(null); // Clear the session data
+    // Clear additional demo credentials and related items
+    [
+      'demo-email',
+      'demo-password',
+      'sb-jrpnzhqsnwvibpojjgeq-auth-token-code-verifier',
+      STORAGE_KEY,
+    ].forEach((item) => {
+      sessionStorage.removeItem(item);
+      localStorage.removeItem(item);
+      document.cookie = `${item}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    });
+
+    window.location.href = '/auth/supabase/sign-in'; // Redirect to login page
+  } catch (error) {
     console.error('Error during sign out:', error);
-    throw error;
   }
-
-  console.log('Signed out successfully');
 };

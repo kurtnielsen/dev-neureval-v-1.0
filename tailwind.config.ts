@@ -1,11 +1,12 @@
-const config = {
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
   corePlugins: {
-    // Remove the Tailwind CSS preflight styles so it can use Material UI's preflight instead (CssBaseline).
-    preflight: false,
+    preflight: false, // To use Material UI's preflight instead (CssBaseline)
   },
   plugins: [],
 };

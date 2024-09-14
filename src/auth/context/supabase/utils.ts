@@ -1,11 +1,9 @@
+// src/auth/context/supabase/utils.ts
+
 import { paths } from 'src/routes/paths';
-
-import axios from 'src/utils/axios';
-
 import { STORAGE_KEY } from './constant';
 
-// ----------------------------------------------------------------------
-
+// Function to decode JWT token
 export function jwtDecode(token: string) {
   try {
     if (!token) return null;
@@ -26,8 +24,7 @@ export function jwtDecode(token: string) {
   }
 }
 
-// ----------------------------------------------------------------------
-
+// Function to check if token is still valid
 export function isValidToken(accessToken: string) {
   if (!accessToken) {
     return false;
@@ -49,8 +46,7 @@ export function isValidToken(accessToken: string) {
   }
 }
 
-// ----------------------------------------------------------------------
-
+// Function to handle token expiration
 export function tokenExpired(exp: number) {
   const currentTime = Date.now();
   const timeLeft = exp * 1000 - currentTime;
@@ -59,7 +55,7 @@ export function tokenExpired(exp: number) {
     try {
       alert('Token expired!');
       sessionStorage.removeItem(STORAGE_KEY);
-      window.location.href = paths.auth.jwt.signIn;
+      window.location.href = paths.auth.supabase.signIn;
     } catch (error) {
       console.error('Error during token expiration:', error);
       throw error;
@@ -67,16 +63,12 @@ export function tokenExpired(exp: number) {
   }, timeLeft);
 }
 
-// ----------------------------------------------------------------------
-
+// Function to set session (storage management)
 export async function setSession(accessToken: string | null) {
   try {
     if (accessToken) {
       sessionStorage.setItem(STORAGE_KEY, accessToken);
-
-      axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-
-      const decodedToken = jwtDecode(accessToken); // ~3 days by minimals server
+      const decodedToken = jwtDecode(accessToken);
 
       if (decodedToken && 'exp' in decodedToken) {
         tokenExpired(decodedToken.exp);
@@ -85,7 +77,6 @@ export async function setSession(accessToken: string | null) {
       }
     } else {
       sessionStorage.removeItem(STORAGE_KEY);
-      delete axios.defaults.headers.common.Authorization;
     }
   } catch (error) {
     console.error('Error during set session:', error);

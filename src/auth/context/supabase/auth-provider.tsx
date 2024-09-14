@@ -3,17 +3,11 @@
 import { useMemo, useEffect, useCallback } from 'react';
 import { useSetState } from 'src/hooks/use-set-state';
 import { AuthContext } from '../auth-context';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { supabase } from 'src/supabaseClient';
 
 import type { AuthState } from '../../types';
 
 // ----------------------------------------------------------------------
-
-/**
- * NOTE:
- * We only build demo at basic level.
- * Customer will need to do some extra handling yourself if you want to extend the logic and other features...
- */
 
 type Props = {
   children: React.ReactNode;
@@ -25,19 +19,13 @@ export function AuthProvider({ children }: Props) {
     loading: true,
   });
 
-  // Initialize Supabase client
-  const supabase = createClientComponentClient();
-
   const checkUserSession = useCallback(async () => {
     try {
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.getSession();
+      const { data, error } = await supabase.auth.getSession();
       if (error) throw error;
 
-      if (session) {
-        const { user } = session;
+      if (data.session) {
+        const { user } = data.session;
         setState({ user, loading: false });
       } else {
         setState({ user: null, loading: false });
@@ -46,14 +34,12 @@ export function AuthProvider({ children }: Props) {
       console.error(error);
       setState({ user: null, loading: false });
     }
-  }, [supabase, setState]);
+  }, [setState]);
 
   useEffect(() => {
     checkUserSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // ----------------------------------------------------------------------
 
   const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
 

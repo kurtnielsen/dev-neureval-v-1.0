@@ -51,14 +51,12 @@ export function SupabaseSignInView() {
 
   const password = useBoolean();
 
-  const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: '@demo1',
-  };
-
   const methods = useForm<SignInSchemaType>({
     resolver: zodResolver(SignInSchema),
-    defaultValues,
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
   const {
@@ -80,7 +78,12 @@ export function SupabaseSignInView() {
 
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
-      <Field.Text name="email" label="Email address" InputLabelProps={{ shrink: true }} />
+      <Field.Text
+        name="email"
+        label="Email address"
+        InputLabelProps={{ shrink: true }}
+        autoComplete="username"
+      />
 
       <Box gap={1.5} display="flex" flexDirection="column">
         <Link
@@ -108,6 +111,7 @@ export function SupabaseSignInView() {
               </InputAdornment>
             ),
           }}
+          autoComplete="current-password"
         />
       </Box>
 
@@ -139,12 +143,6 @@ export function SupabaseSignInView() {
         }
         sx={{ textAlign: { xs: 'center', md: 'left' } }}
       />
-
-      <Alert severity="info" sx={{ mb: 3 }}>
-        Use <strong>{defaultValues.email}</strong>
-        {' with password '}
-        <strong>{defaultValues.password}</strong>
-      </Alert>
 
       {!!errorMsg && (
         <Alert severity="error" sx={{ mb: 3 }}>
