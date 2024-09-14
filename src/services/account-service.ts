@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../models/schema';
-import { Account, NewAccount, accounts } from '../models/schema';
+import { db } from '@/db';
+import { Account, NewAccount, accounts } from '../db/schema';
 
 class AccountService {
   async getAllAccounts(): Promise<Account[]> {

@@ -1,6 +1,6 @@
 import { userService } from '@/services/user-service';
 import { NextResponse } from 'next/server';
-import { NewUser } from '@/models/schema';
+import { NewUser } from '@/db/schema';
 
 export async function GET() {
   try {

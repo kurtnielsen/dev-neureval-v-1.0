@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import db from '@/config/drizzle.config';
-import { User, NewUser, users } from '@/models/schema';
+import { db } from '@/db';
+import { User, NewUser, users } from '@/db/schema';
 
 class UserService {
   async getAllUsers(): Promise<User[]> {

@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../models/schema';
-import { Post, NewPost, posts } from '../models/schema';
+import { db } from '@/db';
+import { Post, NewPost, posts } from '../db/schema';
 
 class PostService {
   async getAllPosts(): Promise<Post[]> {
