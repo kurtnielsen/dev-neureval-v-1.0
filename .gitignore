@@ -97,3 +97,4 @@ temp/
 # Build directories
 build/
 dist/.next/
+.next/
