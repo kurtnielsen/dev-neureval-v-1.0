@@ -69,6 +69,30 @@ export const navData = [
           { title: 'Six', path: paths.dashboard.group.six },
         ],
       },
+      {
+        title: 'User',
+        path: paths.dashboard.user.root,
+        icon: ICONS.user,
+        children: [
+          { title: 'Profile', path: paths.dashboard.user.root },
+          { title: 'Cards', path: paths.dashboard.user.cards },
+          { title: 'List', path: paths.dashboard.user.list },
+          { title: 'Create', path: paths.dashboard.user.new },
+          { title: 'Edit', path: paths.dashboard.user.demo.edit },
+          { title: 'Account', path: paths.dashboard.user.account },
+        ],
+      },
+      {
+        title: 'Blog',
+        path: paths.dashboard.post.root,
+        icon: ICONS.blog,
+        children: [
+          { title: 'List', path: paths.dashboard.post.root },
+          { title: 'Details', path: paths.dashboard.post.demo.details },
+          { title: 'Create', path: paths.dashboard.post.new },
+          { title: 'Edit', path: paths.dashboard.post.demo.edit },
+        ],
+      },
     ],
   },
 ];

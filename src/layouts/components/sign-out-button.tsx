@@ -40,3 +40,4 @@ export function SignOutButton({ onClose, ...other }: Props) {
     </Button>
   );
 }
+//You could go back to the original code once you are comfortable with it.
