@@ -23,7 +23,11 @@ import { Iconify } from 'src/components/iconify';
 import { useAuthContext } from '../../hooks';
 import { FormHead } from '../../components/form-head';
 import { signInWithPassword } from '../../context/supabase';
-
+import { FormDivider } from '@/auth/components/form-divider';
+import { FormSocials } from '@/auth/components/form-socials';
+import { TextField } from '@mui/material';
+import { supabase } from '@/auth/context/supabase';
+import { t } from 'i18next';
 // ----------------------------------------------------------------------
 
 export type SignInSchemaType = zod.infer<typeof SignInSchema>;
@@ -62,16 +66,32 @@ export function SupabaseSignInView() {
     },
   });
 
-  const onSubmit = async (data: SignInSchemaType) => {
+  const onSubmit = handleSubmit(async (data) => {
     try {
-      await signInWithPassword({ email: data.email, password: data.password });
-      await checkUserSession?.();
-      router.refresh();
+      const { data: session, error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+  
+      if (error) throw error;
+  
+      await checkUserSession?.();  // Keeps their session handling intact
+      router.refresh();  // This keeps their routing logic consistent
     } catch (error) {
       console.error(error);
-      setErrorMsg(typeof error === 'string' ? error : error.message);
+      setErrorMsg(error.message || 'Error signing in');
     }
-  };
+  });
+  // const onSubmit = async (data: SignInSchemaType) => {
+  //   try {
+  //     await signInWithPassword({ email: data.email, password: data.password });
+  //     await checkUserSession?.();
+  //     router.refresh();
+  //   } catch (error) {
+  //     console.error(error);
+  //     setErrorMsg(typeof error === 'string' ? error : error.message);
+  //   }
+  // };
 
   return (
     <>
@@ -88,11 +108,11 @@ export function SupabaseSignInView() {
         sx={{ textAlign: { xs: 'center', md: 'left' } }}
       />
 
-      {!!errorMsg && (
-        <Alert severity="error" sx={{ mb: 3 }}>
-          {errorMsg}
-        </Alert>
-      )}
+{!!errorMsg && (
+  <Alert severity="error" sx={{ mb: 3 }}>
+    {errorMsg}
+  </Alert>
+)}
 
       <Box
         component="form"
@@ -102,7 +122,16 @@ export function SupabaseSignInView() {
         flexDirection="column"
         gap={3}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box gap={3} display="flex" flexDirection="column">
+          <TextField
+          label="Email address"
+          {...register('email')}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+          InputLabelProps={{ shrink: true }}
+          fullWidth
+          />
+{/*           
           <Box>
             <label htmlFor="email">Email address</label>
             <input
@@ -121,9 +150,27 @@ export function SupabaseSignInView() {
               }}
             />
             {errors.email && <span>{errors.email.message}</span>}
-          </Box>
+          </Box> */}
 
-          <Box>
+          <TextField
+          label="Password"
+          {...register('password')}
+          type={password.value ? 'text' : 'password'}
+          error={!!errors.password}
+          helperText={errors.password?.message}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={password.onToggle} edge="end">
+                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          InputLabelProps={{ shrink: true }}
+          fullWidth
+          />
+            {/* <Box>
             <label htmlFor="password">Password</label>
             <input
               type={password.value ? 'text' : 'password'}
@@ -144,7 +191,7 @@ export function SupabaseSignInView() {
               <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
             </IconButton>
             {errors.password && <span>{errors.password.message}</span>}
-          </Box>
+          </Box> */}
         </Box>
 
         <Link
@@ -169,6 +216,12 @@ export function SupabaseSignInView() {
           Sign in
         </LoadingButton>
       </Box>
+      <FormDivider />
+      <FormSocials
+        signInWithGoogle={() => {}}
+        singInWithGithub={() => {}}
+        signInWithTwitter={() => {}}
+      />
     </>
   );
 }
