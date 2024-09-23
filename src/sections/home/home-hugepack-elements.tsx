@@ -47,8 +47,8 @@ export function HomeHugePackElements({ sx, ...other }: BoxProps) {
             columnSpacing={{ xs: 0, md: 8 }}
           >
             <Grid xs={12} md={6} lg={7}>
-              <SectionCaption title="Interface Starter Kit" />
-              <SectionTitle title="Large bundle of" txtGradient="elements" sx={{ mt: 3 }} />
+              <SectionCaption title="Extensive Resource Sections" />
+              <SectionTitle title="A bundle of" txtGradient="resources" sx={{ mt: 3 }} />
             </Grid>
 
             <Grid xs={12} md={6} lg={5}>
@@ -57,10 +57,10 @@ export function HomeHugePackElements({ sx, ...other }: BoxProps) {
                   sx={{ color: 'text.disabled', fontSize: { md: 20 }, lineHeight: { md: 36 / 20 } }}
                 >
                   <Box component="span" sx={{ color: 'text.primary' }}>
-                    Explore a comprehensive range of elements
+                    Explore a comprehensive range of resources
                   </Box>
                   <br />
-                  like menus, sliders, buttons, inputs, and others, all conveniently gathered here.
+                  like specific coping strategies, tools, and personalized educational material, all conveniently gathered here.
                 </Typography>
               </m.div>
             </Grid>
@@ -77,7 +77,7 @@ export function HomeHugePackElements({ sx, ...other }: BoxProps) {
               endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
               sx={{ mt: 5, mx: 'auto' }}
             >
-              Browse components
+              Browse resources
             </Button>
           </m.div>
         </Container>

@@ -1,9 +1,13 @@
+// This file defines a comprehensive configuration object, CONFIG, which holds various settings and credentials required for the application to function correctly
+
+// The paths object is imported from src/routes/paths. This likely contains route definitions or path constants used throughout the application.
 import { paths } from 'src/routes/paths';
 
+// The packageJson import brings in the contents of the package.json file, allowing access to metadata such as the application's version.
 import packageJson from '../package.json';
 
 // ----------------------------------------------------------------------
-
+// The ConfigValue type defines the structure of the configuration object. It includes various properties such as appName, appVersion, serverUrl, and more.
 export type ConfigValue = {
   appName: string;
   appVersion: string;
@@ -31,13 +35,16 @@ export type ConfigValue = {
 };
 
 // ----------------------------------------------------------------------
-
+// The CONFIG object is an instance of the ConfigValue type, populated with actual values.
 export const CONFIG: ConfigValue = {
-  appName: 'Minimal UI',
+  // appName is set to 'Minimal UI', and appVersion is dynamically set using the version from package.json.
+  appName: 'Neureval',
   appVersion: packageJson.version,
+  // Environment variables (process.env) are used to populate sensitive information and configuration details, ensuring they can be easily changed without modifying the codebase.
   serverUrl: process.env.NEXT_PUBLIC_SERVER_URL ?? '',
   assetsDir: process.env.NEXT_PUBLIC_ASSETS_DIR ?? '',
   isStaticExport: JSON.parse(`${process.env.BUILD_STATIC_EXPORT}`),
+  // The auth object specifies the authentication method (supabase), whether to skip authentication (skip: false), and the redirect path after login (redirectPath).
   /**
    * Auth
    * @method jwt | amplify | firebase | supabase | auth0
@@ -87,3 +94,5 @@ export const CONFIG: ConfigValue = {
     key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
   },
 };
+
+// In summary, this TypeScript file defines a structured configuration object for a React project using Next.js. It imports necessary paths and package information, defines a type for the configuration structure, and then creates an instance of this configuration with values sourced from environment variables and the package.json file. This approach ensures that the application's configuration is centralized, type-safe, and easily maintainable.

@@ -31,20 +31,19 @@ export function AboutTeam({ sx, ...other }: BoxProps) {
       <Container component={MotionViewport} sx={{ textAlign: 'center', py: { xs: 10, md: 15 } }}>
         <m.div variants={varFade().inDown}>
           <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-            Dream team
+            Clinical Staff
           </Typography>
         </m.div>
 
         <m.div variants={varFade().inUp}>
           <Typography variant="h2" sx={{ my: 3 }}>
-            Great team is the key
+          Our Expert Team
           </Typography>
         </m.div>
 
         <m.div variants={varFade().inUp}>
           <Typography sx={{ mx: 'auto', maxWidth: 640, color: 'text.secondary' }}>
-            Minimal will provide you support if you have any problems, our support team will reply
-            within a day and we also have detailed documentation.
+          A dedicated, compassionate team is at the heart of our success. At Neureval, our clinical staff brings expertise, care, and commitment to every evaluation, ensuring that each child and family receives the personalized support they deserve.
           </Typography>
         </m.div>
 

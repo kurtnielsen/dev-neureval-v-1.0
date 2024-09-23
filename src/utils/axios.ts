@@ -36,6 +36,21 @@ export const endpoints = {
   chat: '/api/chat',
   kanban: '/api/kanban',
   calendar: '/api/calendar',
+  user: {
+    root: '/api/user',
+    profile: '/api/user/profile',
+    cards: '/api/user/cards',
+    addressBook: '/api/user/address-book',
+    notifications: '/api/user/notifications',
+    account: '/api/user/account',
+  },
+  product: {
+    root: '/api/product',
+    details: '/api/product/details',
+    search: '/api/product/search',
+    checkout: '/api/product/checkout',
+  },
+  googleCalendar: '/api/google-calendar',
   auth: {
     me: '/api/auth/me',
     signIn: '/api/auth/sign-in',
@@ -53,9 +68,5 @@ export const endpoints = {
     search: '/api/post/search',
     create: '/api/post/posts',
   },
-  product: {
-    list: '/api/product/list',
-    details: '/api/product/details',
-    search: '/api/product/search',
-  },
+
 };

@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
+import { AlertTitle } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -54,16 +55,16 @@ export function SupabaseSignUpView() {
 
   const [errorMsg, setErrorMsg] = useState('');
 
-  const defaultValues = {
-    firstName: 'Hello',
-    lastName: 'Friend',
-    email: 'hello@gmail.com',
-    password: '@demo1',
-  };
+  // const defaultValues = {
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   password: '',
+  // };
 
   const methods = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
-    defaultValues,
+    // defaultValues,
   });
 
   const {
@@ -71,6 +72,10 @@ export function SupabaseSignUpView() {
     formState: { isSubmitting },
   } = methods;
 
+
+  // The onSubmit function handles form submission. It calls the signUp function from the Supabase context and checks the user session. If an error occurs, it sets an error message.
+  // Access token not found in response
+  // Check your email for the verification link
   const onSubmit = handleSubmit(async (data) => {
     try {
       await signUp({
@@ -88,6 +93,7 @@ export function SupabaseSignUpView() {
     }
   });
 
+  // The renderForm variable contains the JSX for rendering the form fields and the submit button. It uses Material-UI components for styling and layout.
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
       <Box display="flex" gap={{ xs: 3, sm: 2 }} flexDirection={{ xs: 'column', sm: 'row' }}>
@@ -128,10 +134,12 @@ export function SupabaseSignUpView() {
     </Box>
   );
 
+
+  // The component returns JSX that includes the form header, error message (if any), the form itself, and the sign-up terms.
   return (
     <>
       <FormHead
-        title="Get started absolutely free"
+        title="Just a few clicks away..."
         description={
           <>
             {`Already have an account? `}
@@ -145,6 +153,7 @@ export function SupabaseSignUpView() {
 
       {!!errorMsg && (
         <Alert severity="error" sx={{ mb: 3 }}>
+          <AlertTitle>Check your email for the verification link!</AlertTitle>
           {errorMsg}
         </Alert>
       )}
@@ -157,3 +166,5 @@ export function SupabaseSignUpView() {
     </>
   );
 }
+
+// In summary, the SupabaseSignUpView component provides a user interface for signing up new users. It uses zod for validation, react-hook-form for form management, and Supabase for authentication. The component ensures a smooth user experience with proper error handling and form validation.

@@ -39,7 +39,7 @@ export function AboutHero({ sx, ...other }: BoxProps) {
           <AnimateText
             component="h1"
             variant="h1"
-            text={['Who', 'we are?']}
+            text={['What', 'we do.']}
             variants={varFade({ distance: 24 }).inRight}
             sx={{
               color: 'common.white',
@@ -54,8 +54,8 @@ export function AboutHero({ sx, ...other }: BoxProps) {
               variant="h4"
               sx={{ mt: 3, color: 'common.white', fontWeight: 'fontWeightSemiBold' }}
             >
-              Let&apos;s work together and
-              <br /> make awesome site easily
+             Personalized care and assessments 
+              <br />to help neurodiverse individuals thrive.
             </Typography>
           </m.div>
         </Box>

@@ -49,16 +49,14 @@ export function AboutTestimonials({ sx, ...other }: BoxProps) {
 
       <m.div variants={varFade().inUp}>
         <Typography variant="h2" sx={{ my: 3, color: 'common.white' }}>
-          Who love <br />
-          my work
+        What Families <br />
+        Are Saying
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inUp}>
         <Typography sx={{ color: 'common.white' }}>
-          Our goal is to create a product and service that you’re satisfied with and use it every
-          day. This is why we’re constantly working on our services to make it better every day and
-          really listen to what our users has to say.
+        We’re committed to providing impactful, personalized care that supports neurodiverse children and their families. Hear from those who’ve experienced firsthand how our services make a difference in their everyday lives.
         </Typography>
       </m.div>
 

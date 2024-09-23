@@ -69,13 +69,13 @@ export function HomeHero({ sx, ...other }: BoxProps) {
           mx: 'auto',
           maxWidth: 680,
           fontFamily: theme.typography.fontSecondaryFamily,
-          [theme.breakpoints.up(lgKey)]: { fontSize: 72, lineHeight: '90px' },
+          [theme.breakpoints.up(lgKey)]: { fontSize: 62, lineHeight: '90px', color: '' },
         }}
       >
         <Box component="span" sx={{ width: 1, opacity: 0.24 }}>
-          Boost your building
+        Creating pathways to  
         </Box>
-        process with
+        growth and 
         <Box
           component={m.span}
           animate={{ backgroundPosition: '200% center' }}
@@ -93,7 +93,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
             ml: { xs: 0.75, md: 1, xl: 1.5 },
           }}
         >
-          Minimal
+          Success
         </Box>
       </Box>
     </AnimatedDiv>
@@ -109,7 +109,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
           [theme.breakpoints.up(lgKey)]: { fontSize: 20, lineHeight: '36px' },
         }}
       >
-        {`The starting point for your next project is based on MUI. \nEasy customization helps you build apps faster and better.`}
+        {`Your journey to personalized care begins with Neureval. \nTailored solutions designed to empower every family.`}
       </Typography>
     </AnimatedDiv>
   );
@@ -280,8 +280,8 @@ export function HomeHero({ sx, ...other }: BoxProps) {
             <m.div style={{ y: y1 }}>{renderHeading}</m.div>
             <m.div style={{ y: y2 }}>{renderText}</m.div>
           </Stack>
-          <m.div style={{ y: y3 }}>{renderRatings}</m.div>
-          <m.div style={{ y: y4 }}>{renderButtons}</m.div>
+          {/* <m.div style={{ y: y3 }}>{renderRatings}</m.div>
+          <m.div style={{ y: y4 }}>{renderButtons}</m.div> */}
           <m.div style={{ y: y5 }}>{renderIcons}</m.div>
         </Container>
 

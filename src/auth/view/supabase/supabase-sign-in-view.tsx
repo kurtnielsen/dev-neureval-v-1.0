@@ -19,17 +19,22 @@ import { RouterLink } from 'src/routes/components';
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { Iconify } from 'src/components/iconify';
+import { Form, Field } from 'src/components/hook-form';
 
 import { useAuthContext } from '../../hooks';
 import { FormHead } from '../../components/form-head';
-import { signInWithPassword } from '../../context/supabase';
+import { signInWithPassword } from '@/auth/context/supabase';
+
 import { FormDivider } from '@/auth/components/form-divider';
 import { FormSocials } from '@/auth/components/form-socials';
-import { TextField } from '@mui/material';
-import { supabase } from '@/auth/context/supabase';
-import { t } from 'i18next';
-// ----------------------------------------------------------------------
 
+
+// ----------------------------------------------------------------------
+// This is a React component named SupabaseSignInView that handles the sign-in process for a user using Supabase. It leverages TypeScript, React, and the Zod library for schema validation.
+// This is the sign-in form on the right side of the layouts>auth-split page.
+// ---------------------------------------------------------------------- 
+
+// defines a TypeScript type SignInSchemaType inferred from the SignInSchema object. 
 export type SignInSchemaType = zod.infer<typeof SignInSchema>;
 
 export const SignInSchema = zod.object({
@@ -45,6 +50,8 @@ export const SignInSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
+// The SupabaseSignInView function component begins by initializing several hooks. It uses useRouter for navigation, useAuthContext to access authentication-related functions, useState to manage error messages, and useBoolean to toggle the visibility of the password field. Default values for the form fields are set to empty strings.
+
 export function SupabaseSignInView() {
   const router = useRouter();
 
@@ -54,46 +61,95 @@ export function SupabaseSignInView() {
 
   const password = useBoolean();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<SignInSchemaType>({
+  const defaultValues = {
+    email: '',
+    password: '',
+  };
+  
+// ----------------------------------------------------------------------
+
+// The useForm hook from react-hook-form is used to manage the form state and validation. The zodResolver function integrates Zod schema validation with react-hook-form. The handleSubmit function is extracted from the methods object to handle form submission.
+
+  const methods = useForm<SignInSchemaType>({
     resolver: zodResolver(SignInSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues,
   });
 
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      const { data: session, error } = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
-      });
-  
-      if (error) throw error;
-  
-      await checkUserSession?.();  // Keeps their session handling intact
-      router.refresh();  // This keeps their routing logic consistent
-    } catch (error) {
-      console.error(error);
-      setErrorMsg(error.message || 'Error signing in');
-    }
-  });
-  // const onSubmit = async (data: SignInSchemaType) => {
-  //   try {
-  //     await signInWithPassword({ email: data.email, password: data.password });
-  //     await checkUserSession?.();
-  //     router.refresh();
-  //   } catch (error) {
-  //     console.error(error);
-  //     setErrorMsg(typeof error === 'string' ? error : error.message);
-  //   }
-  // };
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods;
 
-  return (
+// ----------------------------------------------------------------------
+
+// The onSubmit function is defined to handle the form submission. It attempts to sign in the user with the provided email and password using the signInWithPassword function. If successful, it checks the user session and refreshes the router. If an error occurs, it sets the error message state.
+
+const onSubmit = handleSubmit(async (data) => {
+  try {
+    await signInWithPassword({ email: data.email, password: data.password });
+    await checkUserSession?.();
+    router.refresh();
+  } catch (error) {
+    console.error(error);
+    setErrorMsg(typeof error === 'string' ? error : error.message);
+  }
+});
+
+// ----------------------------------------------------------------------
+
+//The renderForm variable contains the JSX for the form fields and the submit button. It includes fields for the email and password, with the password field having a toggle button to show or hide the password. The submit button is a LoadingButton that shows a loading indicator while the form is submitting.
+
+const renderForm = (
+  <Box gap={3} display="flex" flexDirection="column">
+    <Field.Text name='email' label='Email address' InputLabelProps={{ shrink: true }} />
+    <Box gap={.5} display="flex" flexDirection="column">
+      <Link
+      component={RouterLink}
+      href={paths.auth.supabase.resetPassword}
+      variant="body2"
+      color="inherit"
+      sx={{ alignSelf: 'flex-end' }}
+      >
+        Forgot password?
+      </Link>
+
+      <Field.Text
+      name='password'
+      label='Password'
+      placeholder='6+ characters'
+      type={password.value ? 'text' : 'password'}
+      InputLabelProps={{ shrink: true }}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton onClick={password.onToggle} edge="end">
+              <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+      />
+    </Box>
+
+    <LoadingButton
+    fullWidth
+    color="inherit"
+    size="large"
+    type="submit"
+    variant="contained"
+    loading={isSubmitting}
+    loadingIndicator="Sign in..."
+    >
+      Sign in
+    </LoadingButton>
+  </Box>
+);
+    
+// ----------------------------------------------------------------------
+
+// Finally, the component returns the JSX for the sign-in view. It includes a FormHead component with a title and description, an error message alert if there is an error, the form itself, a FormDivider, and FormSocials for social sign-in options.
+  
+return (
     <>
       <FormHead
         title="Sign in to your account"
@@ -114,108 +170,10 @@ export function SupabaseSignInView() {
   </Alert>
 )}
 
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-        autoComplete="on"
-        display="flex"
-        flexDirection="column"
-        gap={3}
-      >
-        <Box gap={3} display="flex" flexDirection="column">
-          <TextField
-          label="Email address"
-          {...register('email')}
-          error={!!errors.email}
-          helperText={errors.email?.message}
-          InputLabelProps={{ shrink: true }}
-          fullWidth
-          />
-{/*           
-          <Box>
-            <label htmlFor="email">Email address</label>
-            <input
-              type="email"
-              id="email"
-              {...register('email')}
-              autoComplete="username"
-              placeholder="Email"
-              required
-              style={{
-                width: '100%',
-                padding: '10px',
-                margin: '5px 0',
-                borderRadius: '4px',
-                border: '1px solid #ccc',
-              }}
-            />
-            {errors.email && <span>{errors.email.message}</span>}
-          </Box> */}
+<Form methods={methods} onSubmit={onSubmit}>
+  {renderForm}
+  </Form> 
 
-          <TextField
-          label="Password"
-          {...register('password')}
-          type={password.value ? 'text' : 'password'}
-          error={!!errors.password}
-          helperText={errors.password?.message}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          InputLabelProps={{ shrink: true }}
-          fullWidth
-          />
-            {/* <Box>
-            <label htmlFor="password">Password</label>
-            <input
-              type={password.value ? 'text' : 'password'}
-              id="password"
-              {...register('password')}
-              autoComplete="current-password"
-              placeholder="6+ characters"
-              required
-              style={{
-                width: '100%',
-                padding: '10px',
-                margin: '5px 0',
-                borderRadius: '4px',
-                border: '1px solid #ccc',
-              }}
-            />
-            <IconButton onClick={password.onToggle} edge="end">
-              <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-            </IconButton>
-            {errors.password && <span>{errors.password.message}</span>}
-          </Box> */}
-        </Box>
-
-        <Link
-          component={RouterLink}
-          href="#"
-          variant="body2"
-          color="inherit"
-          sx={{ alignSelf: 'flex-end' }}
-        >
-          Forgot password?
-        </Link>
-
-        <LoadingButton
-          fullWidth
-          color="inherit"
-          size="large"
-          type="submit"
-          variant="contained"
-          loading={isSubmitting}
-          loadingIndicator="Sign in..."
-        >
-          Sign in
-        </LoadingButton>
-      </Box>
       <FormDivider />
       <FormSocials
         signInWithGoogle={() => {}}

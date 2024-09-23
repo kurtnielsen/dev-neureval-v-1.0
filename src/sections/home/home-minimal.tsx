@@ -33,9 +33,9 @@ export function HomeMinimal({ sx, ...other }: BoxProps) {
   const renderDescription = (
     <>
       <SectionTitle
-        caption="Visualizing Success"
-        title="What's in"
-        txtGradient="Minimal?"
+        caption="Typical is for the competition."
+        title="We strive to be  "
+        txtGradient="Different!"
         sx={{ mb: { xs: 5, md: 8 }, textAlign: { xs: 'center', md: 'left' } }}
       />
 
@@ -137,17 +137,18 @@ export function HomeMinimal({ sx, ...other }: BoxProps) {
 const ITEMS = [
   {
     icon: `${CONFIG.assetsDir}/assets/icons/home/ic-make-brand.svg`,
-    title: 'Branding',
-    description: 'Consistent design makes it easy to brand your own.',
+    title: 'Automated Pre-Screening',
+    description: 'Assist with initial intake processes by gathering pre-appointment data.',
   },
   {
     icon: `${CONFIG.assetsDir}/assets/icons/home/ic-design.svg`,
-    title: 'UI & UX design',
-    description: 'The kit is built on the principles of the atomic design system.',
+    title: 'Streamlining Assessments',
+    description: 'AI-informed questions to narrow down potential symptoms, behavior patterns, and developmental history.',
   },
   {
     icon: `${CONFIG.assetsDir}/assets/icons/home/ic-development.svg`,
-    title: 'Development',
-    description: 'Easy to customize and extend, saving you time and money.',
+    title: 'Personalized Recommendations',
+    description: 'Tailored guides for parents on how to support neurodivergent children.',
   },
 ];
+//The title must be dynamic somewhere else in the code.

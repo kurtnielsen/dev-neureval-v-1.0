@@ -100,9 +100,8 @@ export function AboutVision({ sx, ...other }: BoxProps) {
         </Box>
 
         <m.div variants={varFade().inUp}>
-          <Typography variant="h3" sx={{ textAlign: 'center', maxWidth: 800, mx: 'auto' }}>
-            Our vision offering the best product nulla vehicula tortor scelerisque ultrices
-            malesuada.
+          <Typography variant="h4" sx={{ textAlign: 'center', maxWidth: 800, mx: 'auto' }}>
+          We aim to provide seamless, personalized evaluations for neurodiverse individuals. By combining advanced technology with expert support, we empower families to achieve lasting success.
           </Typography>
         </m.div>
       </Container>

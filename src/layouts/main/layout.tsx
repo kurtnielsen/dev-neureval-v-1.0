@@ -85,7 +85,7 @@ export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
                   onClose={mobileNavOpen.onFalse}
                 />
                 {/* -- Logo -- */}
-                <Logo />
+                <Logo isSingle={false} width={180} height={116} />
               </>
             ),
             rightArea: (
@@ -104,7 +104,7 @@ export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
                   {/* -- Sign in button -- */}
                   <SignInButton />
                   {/* -- Purchase button -- */}
-                  <Button
+                  {/* <Button
                     variant="contained"
                     rel="noopener"
                     target="_blank"
@@ -114,8 +114,8 @@ export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
                       [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },
                     }}
                   >
-                    Purchase
-                  </Button>
+                    Providers
+                  </Button> */}
                 </Box>
               </>
             ),

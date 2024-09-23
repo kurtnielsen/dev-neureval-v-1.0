@@ -17,6 +17,7 @@ import { _socials } from 'src/_mock';
 import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
 
 import { Logo } from 'src/components/logo';
+import { is } from 'drizzle-orm';
 
 // ----------------------------------------------------------------------
 
@@ -61,7 +62,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
           [theme.breakpoints.up(layoutQuery)]: { textAlign: 'unset' },
         }}
       >
-        <Logo />
+        <Logo /> 
 
         <Grid
           container
@@ -80,8 +81,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                 [theme.breakpoints.up(layoutQuery)]: { mx: 'unset' },
               }}
             >
-              The starting point for your next project with Minimal UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
+              Neureval, delivering customized care and assessments, powered by the latest in technology and compassion.
             </Typography>
 
             <Stack

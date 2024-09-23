@@ -12,7 +12,7 @@ export function ContactForm({ sx, ...other }: BoxProps) {
     <Box sx={sx} {...other}>
       <Typography variant="h3">
         Feel free to contact us. <br />
-        We&apos;ll be glad to hear from you buddy.
+        We&apos;ll be glad to hear from you.
       </Typography>
 
       <Box gap={3} display="flex" flexDirection="column" sx={{ my: 5 }}>

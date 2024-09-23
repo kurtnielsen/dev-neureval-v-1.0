@@ -25,6 +25,11 @@ export const SKILLS = [...Array(3)].map((_, index) => ({
   value: [20, 40, 60][index],
 }));
 
+export const PROGRESS_AREAS = [...Array(3)].map((_, index) => ({
+  label: ['Social Skills', 'Emotional Regulation', 'Academic Performance'][index],
+  value: [60, 40, 70][index],
+}));
+
 // ----------------------------------------------------------------------
 
 export function AboutWhat({ sx, ...other }: BoxProps) {
@@ -87,7 +92,7 @@ export function AboutWhat({ sx, ...other }: BoxProps) {
           <Grid xs={12} md={6} lg={5}>
             <m.div variants={varFade().inRight}>
               <Typography variant="h2" sx={{ mb: 3 }}>
-                What is Minimal?
+                Who we are?
               </Typography>
             </m.div>
 
@@ -95,15 +100,12 @@ export function AboutWhat({ sx, ...other }: BoxProps) {
               <Typography
                 sx={{ color: 'text.secondary', [stylesMode.dark]: { color: 'common.white' } }}
               >
-                Our theme is the most advanced and user-friendly theme you will find on the market,
-                we have documentation and video to help set your site really easily, pre-installed
-                demos you can import in one click and everything from the theme options to page
-                content can be edited from the front-end. This is the theme you are looking for.
+                At Neureval, we are dedicated to reshaping the way neurodiverse evaluations are conducted. Our vision is to provide a seamless, comprehensive experience that empowers individuals through personalized assessments, cutting-edge technology, and a supportive community. By integrating innovative tools and evidence-based practices, we help every child and family discover their unique path to success.
               </Typography>
             </m.div>
 
-            <Box gap={3} display="flex" flexDirection="column" sx={{ my: 5 }}>
-              {SKILLS.map((progress, index) => (
+            <Box gap={3} display="flex" flexDirection="column" sx={{ my: 3 }}>
+              {PROGRESS_AREAS.map((progress, index) => (
                 <Box component={m.div} key={progress.label} variants={varFade().inRight}>
                   <Box
                     display="flex"
