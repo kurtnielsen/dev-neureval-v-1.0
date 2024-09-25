@@ -4,14 +4,11 @@ import axios from 'axios';
 
 import { CONFIG } from 'src/config-global';
 
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from 'src/supabaseClient';
 
 // ----------------------------------------------------------------------
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+
 
 // ----------------------------------------------------------------------
 // create global baseUrl so that API routes are appended to a common root

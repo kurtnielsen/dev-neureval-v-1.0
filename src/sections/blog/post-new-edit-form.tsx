@@ -29,6 +29,7 @@ import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
 import { PostDetailsPreview } from './post-details-preview';
 import { endpoints, fetcherPost } from '@/utils/axios';
+import { supabase } from '@/supabaseClient';
 
 // ----------------------------------------------------------------------
 
@@ -95,18 +96,31 @@ export function PostNewEditForm({ currentPost }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      console.log("Form Data: ", data);
-
-    // Replace with actual API call to create post
-    const response = await fetcherPost(endpoints.post.create, data); // Send data to your API
-    
-    // Log and reset the form on success
+      // Fetch the user session to get the user ID
+      const session = await supabase.auth.getSession();
+  
+      if (!session.data?.session?.user?.id) {
+        toast.error("User not authenticated");
+        return;
+      }
+  
+      const userId = session.data.session.user.id;  // Get user ID
+  
+      // Add the created_by_id to the post data
+      const postData = {
+        ...data,
+        created_by_id: userId,  // Include the user ID
+      };
+  
+      console.log("Form Data: ", postData);
+  
+      // API call to create post
+      const response = await fetcherPost(endpoints.post.create, postData); // Send data to your API
+      
       console.log('Post created:', response);
       reset();
       preview.onFalse();
       toast.success(currentPost ? 'Update success!' : 'Create success!');
-
-      // Redirect to the dashboard post listing page
       router.push(paths.dashboard.post.root);
     } catch (error) {
       console.error("Error creating post: ", error);

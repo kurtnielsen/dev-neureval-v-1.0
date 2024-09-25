@@ -8,14 +8,12 @@
 const isStaticExport = 'false';
 
 const nextConfig = {
-  trailingSlash: true,
+  trailingSlash: false, // Disable trailing slash enforcement
   
-  // The env property allows you to define environment variables that will be available in both the server and client-side code. Here, BUILD_STATIC_EXPORT is set to the value of isStaticExport.
   env: {
     BUILD_STATIC_EXPORT: isStaticExport,
-    DEV_API: 'http://localhost:7272',
+    DEV_API: 'http://localhost:8083', // Updated API
   },
-
   // This section optimizes the import of Material-UI components and icons by transforming them into modular imports. This can help reduce the bundle size by only including the necessary parts of the library.
   modularizeImports: {
     '@mui/icons-material': {

@@ -7,6 +7,8 @@
 import { supabase } from 'src/supabaseClient';
 import { setSession } from './utils';
 import { STORAGE_KEY } from './constant';
+import { syncUserWithDatabase } from 'src/auth/context/supabase/userSync';
+
 
 // The SignInParams and SignUpParams types are defined to specify the expected structure of the parameters for the sign-in and sign-up functions. These types ensure that the functions receive the correct data.
 
@@ -82,6 +84,14 @@ export const signUp = async ({
     throw error;
   }
 };
+/** **************************************
+ * Sync user with database
+ * xample function that runs after login or on page load
+ *************************************** */
+
+async function handleUserLogin() {
+  // Sync the user with your database
+  await syncUserWithDatabase();
 
 /** **************************************
  * Sign out
@@ -121,5 +131,6 @@ export const signOut = async (): Promise<void> => {
     console.error('Error during sign out:', error);
   }
 };
+
 
 // In summary, this module provides a set of functions to handle user authentication using Supabase. It includes robust error handling and ensures that session data is properly managed and stored.

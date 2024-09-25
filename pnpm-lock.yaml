@@ -178,7 +178,7 @@ importers:
         version: 0.24.2
       drizzle-orm:
         specifier: ^0.33.0
-        version: 0.33.0(@prisma/client@5.19.1(prisma@5.19.1))(@types/pg@8.11.10)(@types/react@18.3.5)(pg@8.12.0)(postgres@3.4.4)(prisma@5.19.1)(react@18.3.1)
+        version: 0.33.0(@prisma/client@5.19.1(prisma@5.19.1))(@types/pg@8.11.10)(@types/react@18.3.5)(pg@8.12.0(pg-native@3.2.0))(postgres@3.4.4)(prisma@5.19.1)(react@18.3.1)
       embla-carousel:
         specifier: ^8.2.0
         version: 8.3.0
@@ -232,7 +232,10 @@ importers:
         version: 0.2.0
       pg:
         specifier: ^8.12.0
-        version: 8.12.0
+        version: 8.12.0(pg-native@3.2.0)
+      pg-native:
+        specifier: ^3.2.0
+        version: 3.2.0
       postgres:
         specifier: ^3.4.4
         version: 3.4.4
@@ -3206,6 +3209,9 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
+  bindings@1.5.0:
+    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
 
@@ -4010,6 +4016,9 @@ packages:
     resolution: {integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==}
     engines: {node: '>= 12'}
 
+  file-uri-to-path@1.0.0:
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
@@ -4560,6 +4569,9 @@ packages:
   libphonenumber-js@1.11.8:
     resolution: {integrity: sha512-0fv/YKpJBAgXKy0kaS3fnqoUVN8901vUYAKIGD/MWZaDfhJt1nZjPL3ZzdZBt/G8G8Hw2J1xOIrXWdNHFHPAvg==}
 
+  libpq@1.8.13:
+    resolution: {integrity: sha512-t1wpnGVgwRIFSKoe4RFUllAFj953kNMcdXhGvFJwI0r6lJQqgSwTeiIciaCinjOmHk0HnFeWQSMC6Uw2591G4A==}
+
   lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
@@ -4830,6 +4842,9 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
+  nan@2.19.0:
+    resolution: {integrity: sha512-nO1xXxfh/RWNxfd/XPfbIfFk5vgLsAxUR9y5O0cHMJu/AW9U95JLXqthYHjEp+8gQ5p96K9jUp8nbVOxCdRbtw==}
+
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -5015,6 +5030,9 @@ packages:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
 
+  pg-native@3.2.0:
+    resolution: {integrity: sha512-9q9I6RmT285DiRc0xkYb8e+bwOIIbnfVLddnzzXW35K1sZc74dR+symo2oeuzSW/sDQ8n24gWAvlGWK/GDJ3+Q==}
+
   pg-numeric@1.0.2:
     resolution: {integrity: sha512-BM/Thnrw5jm2kKLE5uJkXqqExRUY/toLHda65XgFTBTFYZyopbKjBe29Ii3RbkvlsMoFwD+tHeGaCjjv0gHlyw==}
     engines: {node: '>=4'}
@@ -5026,6 +5044,9 @@ packages:
 
   pg-protocol@1.6.1:
     resolution: {integrity: sha512-jPIlvgoD63hrEuihvIg+tJhoGjUsLPn6poJY9N5CnlPd91c2T18T/9zBtLxZSb1EhYxBRoZJtzScCaWlYLtktg==}
+
+  pg-types@1.13.0:
+    resolution: {integrity: sha512-lfKli0Gkl/+za/+b6lzENajczwZHc7D5kiUCZfgm914jipD2kIOIvEkAhZ8GrW3/TUoP9w8FHjwpPObBye5KQQ==}
 
   pg-types@2.2.0:
     resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
@@ -5118,6 +5139,10 @@ packages:
   postcss@8.4.45:
     resolution: {integrity: sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==}
     engines: {node: ^10 || ^12 || >=14}
+
+  postgres-array@1.0.3:
+    resolution: {integrity: sha512-5wClXrAP0+78mcsNX3/ithQ5exKvCyK5lr5NEEEeGwwM6NJdQgzIJBVxLvRW+huFpX92F2QnZ5CcokH0VhK2qQ==}
+    engines: {node: '>=0.10.0'}
 
   postgres-array@2.0.0:
     resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
@@ -9803,6 +9828,10 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
+  bindings@1.5.0:
+    dependencies:
+      file-uri-to-path: 1.0.0
+
   boolbase@1.0.0: {}
 
   bowser@2.11.0: {}
@@ -10178,12 +10207,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.33.0(@prisma/client@5.19.1(prisma@5.19.1))(@types/pg@8.11.10)(@types/react@18.3.5)(pg@8.12.0)(postgres@3.4.4)(prisma@5.19.1)(react@18.3.1):
+  drizzle-orm@0.33.0(@prisma/client@5.19.1(prisma@5.19.1))(@types/pg@8.11.10)(@types/react@18.3.5)(pg@8.12.0(pg-native@3.2.0))(postgres@3.4.4)(prisma@5.19.1)(react@18.3.1):
     optionalDependencies:
       '@prisma/client': 5.19.1(prisma@5.19.1)
       '@types/pg': 8.11.10
       '@types/react': 18.3.5
-      pg: 8.12.0
+      pg: 8.12.0(pg-native@3.2.0)
       postgres: 3.4.4
       prisma: 5.19.1
       react: 18.3.1
@@ -10706,6 +10735,8 @@ snapshots:
   file-selector@0.6.0:
     dependencies:
       tslib: 2.7.0
+
+  file-uri-to-path@1.0.0: {}
 
   fill-range@7.1.1:
     dependencies:
@@ -11303,6 +11334,11 @@ snapshots:
 
   libphonenumber-js@1.11.8: {}
 
+  libpq@1.8.13:
+    dependencies:
+      bindings: 1.5.0
+      nan: 2.19.0
+
   lilconfig@2.1.0: {}
 
   lilconfig@3.1.2: {}
@@ -11796,6 +11832,8 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
+  nan@2.19.0: {}
+
   nanoid@3.3.7: {}
 
   natural-compare-lite@1.4.0: {}
@@ -11983,13 +12021,26 @@ snapshots:
 
   pg-int8@1.0.1: {}
 
+  pg-native@3.2.0:
+    dependencies:
+      libpq: 1.8.13
+      pg-types: 1.13.0
+
   pg-numeric@1.0.2: {}
 
-  pg-pool@3.6.2(pg@8.12.0):
+  pg-pool@3.6.2(pg@8.12.0(pg-native@3.2.0)):
     dependencies:
-      pg: 8.12.0
+      pg: 8.12.0(pg-native@3.2.0)
 
   pg-protocol@1.6.1: {}
+
+  pg-types@1.13.0:
+    dependencies:
+      pg-int8: 1.0.1
+      postgres-array: 1.0.3
+      postgres-bytea: 1.0.0
+      postgres-date: 1.0.7
+      postgres-interval: 1.2.0
 
   pg-types@2.2.0:
     dependencies:
@@ -12009,15 +12060,16 @@ snapshots:
       postgres-interval: 3.0.0
       postgres-range: 1.1.4
 
-  pg@8.12.0:
+  pg@8.12.0(pg-native@3.2.0):
     dependencies:
       pg-connection-string: 2.6.4
-      pg-pool: 3.6.2(pg@8.12.0)
+      pg-pool: 3.6.2(pg@8.12.0(pg-native@3.2.0))
       pg-protocol: 1.6.1
       pg-types: 2.2.0
       pgpass: 1.0.5
     optionalDependencies:
       pg-cloudflare: 1.1.1
+      pg-native: 3.2.0
 
   pgpass@1.0.5:
     dependencies:
@@ -12082,6 +12134,8 @@ snapshots:
       nanoid: 3.3.7
       picocolors: 1.1.0
       source-map-js: 1.2.1
+
+  postgres-array@1.0.3: {}
 
   postgres-array@2.0.0: {}
 

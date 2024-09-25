@@ -2,7 +2,8 @@ import { db } from 'src/db/lib/db';  // Drizzle ORM instance
 import { posts } from 'src/db/schema';  // Posts schema
 import { STATUS, response, handleError } from 'src/utils/response';
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
   try {
@@ -18,9 +19,11 @@ export async function POST(req: Request) {
     //   createdAt: new Date(),
     // }).returning();
 
-    return response({ post: newPost }, STATUS.CREATED);
+    // return response({ post: newPost }, STATUS.CREATED);
+    return new Response(JSON.stringify({ post: newPost }), { status: 201 });
   } catch (error) {
     console.error('Error creating new post:', error);
-    return handleError('Error creating new post', error);
+    // return handleError('Error creating new post', error);
+    return new Response('Error creating post', { status: 500 });
   }
 }
