@@ -3,11 +3,12 @@
 // It splits the URL at the ? character to isolate the query string.
 // If a query string exists, it creates a URLSearchParams object and checks if the serialized query string has a length greater than zero.
 // This function returns true if the URL has query parameters, otherwise false.
+
 export const hasParams = (url: string): boolean => {
-  const queryString = url.split('?')[1];
+  const urlString = typeof url === 'string' ? url : String(url);
+  const queryString = urlString.split('?')[1];
   return queryString ? new URLSearchParams(queryString).toString().length > 0 : false;
 };
-
 // ----------------------------------------------------------------------
 // The removeLastSlash function removes the trailing slash from a given pathname, except if the pathname is just /.
 // This function is useful for normalizing pathnames to avoid issues with trailing slashes.
@@ -46,7 +47,8 @@ export function removeParams(url: string): string {
 // The isExternalLink function checks if a given URL is an external link (by checking if it starts with http).
 // It is useful for distinguishing between internal and external links in a web application.
 export function isExternalLink(url: string): boolean {
-  return url.startsWith('http');
+  const urlString = typeof url === 'string' ? url : String(url);
+  return urlString.startsWith('http');
 }
 
 

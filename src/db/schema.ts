@@ -220,3 +220,7 @@ export const db = drizzle(pool, {
 
 // Running Supabase Locally
 // https://supabase.com/docs/guides/cli/getting-started#installing-the-supabase-cli
+// supabase --db-url postgresql://postgres:postgres@localhost:5432/postgres inspect db bloat
+// supabase --db-url postgresql://postgres.jrpnzhqsnwvibpojjgeq:dvLtgTMY4DhSxBLo@aws-0-us-west-1.pooler.supabase.com:6543/postgres inspect db bloat
+// supabase link --project-ref <project-id>
+// supabase link --project-ref jrpnzhqsnwvibpojjgeq

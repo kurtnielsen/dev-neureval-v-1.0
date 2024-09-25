@@ -32,10 +32,10 @@ import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase'
 // The code defines a constant AuthProvider based on the authentication method specified in the configuration:
 
 const AuthProvider =
-  // (CONFIG.auth.method === 'amplify' && AmplifyAuthProvider) ||
-  // (CONFIG.auth.method === 'firebase' && FirebaseAuthProvider) ||
-  // (CONFIG.auth.method === 'jwt' && JwtAuthProvider) ||
-  // (CONFIG.auth.method === 'auth0' && Auth0AuthProvider) ||
+  (CONFIG.auth.method === 'amplify' && AmplifyAuthProvider) ||
+  (CONFIG.auth.method === 'firebase' && FirebaseAuthProvider) ||
+  (CONFIG.auth.method === 'jwt' && JwtAuthProvider) ||
+  (CONFIG.auth.method === 'auth0' && Auth0AuthProvider) ||
   SupabaseAuthProvider;
 
   // These settings configure the viewport for responsive design and set the favicon for the application.

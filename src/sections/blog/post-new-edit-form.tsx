@@ -28,6 +28,7 @@ import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
 import { PostDetailsPreview } from './post-details-preview';
+import { endpoints, fetcherPost } from '@/utils/axios';
 
 // ----------------------------------------------------------------------
 
@@ -94,16 +95,35 @@ export function PostNewEditForm({ currentPost }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      console.log("Form Data: ", data);
+
+    // Replace with actual API call to create post
+    const response = await fetcherPost(endpoints.post.create, data); // Send data to your API
+    
+    // Log and reset the form on success
+      console.log('Post created:', response);
       reset();
       preview.onFalse();
       toast.success(currentPost ? 'Update success!' : 'Create success!');
+
+      // Redirect to the dashboard post listing page
       router.push(paths.dashboard.post.root);
-      console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      console.error("Error creating post: ", error);
+      toast.error("Failed to create post");
     }
   });
+
+  //     await new Promise((resolve) => setTimeout(resolve, 500));
+  //     reset();
+  //     preview.onFalse();
+  //     toast.success(currentPost ? 'Update success!' : 'Create success!');
+  //     router.push(paths.dashboard.post.root);
+  //     console.info('DATA', data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // });
 
   const handleRemoveFile = useCallback(() => {
     setValue('coverUrl', null);

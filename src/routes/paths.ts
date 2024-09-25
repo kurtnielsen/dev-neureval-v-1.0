@@ -192,4 +192,6 @@ export const paths = {
   },
 };
 
+// TODO!! Removing the demo code breaks the site so i will need to fix this later
+
 // In summary, the provided code snippet defines a hierarchical structure of paths for a dashboard module in a TypeScript project. It uses template literals to construct URLs consistently, making it easy to manage and update the paths. The structure includes both primary paths and a nested general category for additional features, promoting organization and maintainability within the application's routing configuration. This approach is particularly useful in a React application, where managing routes efficiently is crucial for navigation and user experience.

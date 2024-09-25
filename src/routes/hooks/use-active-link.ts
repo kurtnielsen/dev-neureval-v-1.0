@@ -11,12 +11,13 @@ import { hasParams, removeParams, isExternalLink, removeLastSlash } from '../uti
 export function useActiveLink(itemPath: string, deep: boolean = true): boolean {
   const pathname = removeLastSlash(usePathname());
 
-  const pathHasParams = hasParams(itemPath);
+  const itemPathString = typeof itemPath === 'string' ? itemPath : String(itemPath);
+  const pathHasParams = hasParams(itemPathString);
 
   /* Start check */
   // It checks if itemPath starts with a # (indicating an anchor link) or if it is an external link using isExternalLink.
   // If either condition is true, the function returns false, indicating that the path is not active.
-  const notValid = itemPath.startsWith('#') || isExternalLink(itemPath);
+  const notValid = itemPathString.startsWith('#') || isExternalLink(itemPathString);
 
   if (notValid) {
     return false;
@@ -41,7 +42,7 @@ export function useActiveLink(itemPath: string, deep: boolean = true): boolean {
      * @match pathname = '/dashboard/user/list'
      * @match pathname = '/dashboard/user/e99f09a7-dd88-49d5-b1c8-1daf80c2d7b15/edit'
      */
-    const defaultActive = pathname.includes(itemPath);
+    const defaultActive = pathname.includes(itemPathString);
 // It checks if the current pathname includes itemPath (defaultActive).
     /**
      * [1] Deep: has params
@@ -49,12 +50,12 @@ export function useActiveLink(itemPath: string, deep: boolean = true): boolean {
      * @match pathname = '/dashboard/test'
      */
 // It removes query parameters from itemPath using removeParams and checks if the resulting path matches the current pathname (hasParamsActive).
-    const originItemPath = removeParams(itemPath);
+const originItemPath = removeParams(itemPathString);
 
 // The function returns true if either defaultActive or hasParamsActive is true.
-    const hasParamsActive = pathHasParams && originItemPath === pathname;
+const hasParamsActive = pathHasParams && originItemPath === pathname;
 
-    return defaultActive || hasParamsActive;
+return defaultActive || hasParamsActive;
   }
 
   /**
@@ -63,7 +64,7 @@ export function useActiveLink(itemPath: string, deep: boolean = true): boolean {
    * @match pathname = '/dashboard/calendar'
    */
   // If isDeep is false, the function performs a normal match: It simply checks if the current pathname is equal to itemPath.
-  return pathname === itemPath;
+  return pathname === itemPathString;
 }
 
 // In summary, the useActiveLink function is a versatile hook for determining the active state of a navigation link. 

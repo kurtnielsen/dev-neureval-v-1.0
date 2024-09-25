@@ -6,6 +6,30 @@ import { paths } from 'src/routes/paths';
 // The packageJson import brings in the contents of the package.json file, allowing access to metadata such as the application's version.
 import packageJson from '../package.json';
 
+// ConfigType: bringing over from server app
+// type ConfigType = {
+//   basePath?: string;
+//   appVersion: string;
+//   cors: {
+//     origins: string[];
+//     methods: string[];
+//   };
+// };
+// export const CONFIG: ConfigType = {
+//   appVersion: packageJson.version,
+//   basePath:
+//     process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_API : process.env.DEV_API,
+//   cors: {
+//     /**
+//      * [] = allow all origins
+//      * ['http://localhost:8081', 'http://localhost:8082'] = allow only these origins
+//      */
+//     origins: [],
+//     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+//   },
+// };
+
+
 // ----------------------------------------------------------------------
 // The ConfigValue type defines the structure of the configuration object. It includes various properties such as appName, appVersion, serverUrl, and more.
 export type ConfigValue = {
@@ -14,8 +38,14 @@ export type ConfigValue = {
   serverUrl: string;
   assetsDir: string;
   isStaticExport: boolean;
+  // added cors from server config code-not sure it is correct placement?
+  cors: {
+    origins: string[];
+    methods: string[];
+  };
+  JWT_SECRET: string;
   auth: {
-    method: 'supabase';
+    method: 'jwt' | 'amplify' | 'firebase' | 'supabase' | 'auth0';
     skip: boolean;
     redirectPath: string;
   };
@@ -41,9 +71,22 @@ export const CONFIG: ConfigValue = {
   appName: 'Neureval',
   appVersion: packageJson.version,
   // Environment variables (process.env) are used to populate sensitive information and configuration details, ensuring they can be easily changed without modifying the codebase.
-  serverUrl: process.env.NEXT_PUBLIC_SERVER_URL ?? '',
+  serverUrl: process.env.NEXT_PUBLIC_API_URL ?? '',
   assetsDir: process.env.NEXT_PUBLIC_ASSETS_DIR ?? '',
   isStaticExport: JSON.parse(`${process.env.BUILD_STATIC_EXPORT}`),
+
+  // integrating cors from server app
+  cors: {
+    /**
+     * [] = allow all origins
+     * ['http://localhost:8081', 'http://localhost:8082'] = allow only these origins
+     */
+    origins: [],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  },
+  // JWT_Secret is set to the value of the JWT_SECRET environment variable.
+  JWT_SECRET: process.env.JWT_SECRET ?? '',
+
   // The auth object specifies the authentication method (supabase), whether to skip authentication (skip: false), and the redirect path after login (redirectPath).
   /**
    * Auth
