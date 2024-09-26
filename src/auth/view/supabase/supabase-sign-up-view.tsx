@@ -26,9 +26,11 @@ import { signUp } from '../../context/supabase';
 import { useAuthContext } from '../../hooks';
 import { FormHead } from '../../components/form-head';
 import { SignUpTerms } from '../../components/sign-up-terms';
-
+// import { syncUserWithDatabase } from 'src/utils/sync-user';
+// sync-user needs to be on the server side (fs module error)
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
 export type SignUpSchemaType = zod.infer<typeof SignUpSchema>;
 
 export const SignUpSchema = zod.object({
@@ -84,14 +86,20 @@ export function SupabaseSignUpView() {
         firstName: data.firstName,
         lastName: data.lastName,
       });
-      await checkUserSession?.();
+ // Check user session to ensure the user is logged in
+ await checkUserSession?.();
 
-      router.refresh();
-    } catch (error) {
-      console.error(error);
-      setErrorMsg(typeof error === 'string' ? error : error.message);
-    }
-  });
+ // Sync the user with the database (insert into your users table)
+//  await syncUserWithDatabase(); // This ensures the user is inserted into the local DB
+ 
+ // Refresh the router (optional)
+ router.refresh();
+ 
+} catch (error) {
+ console.error(error);
+ setErrorMsg(typeof error === 'string' ? error : error.message);
+}
+});
 
   // The renderForm variable contains the JSX for rendering the form fields and the submit button. It uses Material-UI components for styling and layout.
   const renderForm = (

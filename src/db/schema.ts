@@ -50,6 +50,8 @@ export const authors = pgTable('authors', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   name: varchar('name', { length: 255 }).notNull(),
   avatarUrl: text('avatar_url'),
+  userId: uuid('user_id'),
+  isAdmin: boolean('is_admin').default(false),
 });
 
 // PostTags Join Table

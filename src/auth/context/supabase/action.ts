@@ -7,7 +7,7 @@
 import { supabase } from 'src/supabaseClient';
 import { setSession } from './utils';
 import { STORAGE_KEY } from './constant';
-import { syncUserWithDatabase } from 'src/auth/context/supabase/userSync';
+// import { syncUserWithDatabase } from 'src/auth/context/supabase/userSync';
 
 
 // The SignInParams and SignUpParams types are defined to specify the expected structure of the parameters for the sign-in and sign-up functions. These types ensure that the functions receive the correct data.
@@ -89,9 +89,9 @@ export const signUp = async ({
  * xample function that runs after login or on page load
  *************************************** */
 
-async function handleUserLogin() {
-  // Sync the user with your database
-  await syncUserWithDatabase();
+// async function handleUserLogin() {
+//   // Sync the user with your database
+//   await syncUserWithDatabase();
 
 /** **************************************
  * Sign out
