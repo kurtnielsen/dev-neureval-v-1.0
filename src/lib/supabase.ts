@@ -19,4 +19,20 @@ export const supabase = isSupabase
   ? createClient(supabaseUrl, supabaseKey)
   : ({} as SupabaseClient<any, 'public', any>);
 
-  // In summary, this TypeScript module sets up a Supabase client for a React project using Next.js. It imports necessary functions and types, checks the configuration to determine if Supabase should be used for authentication, and conditionally creates and exports a Supabase client instance. This approach ensures that the Supabase client is only created if it is needed, based on the project's configuration settings. This setup is crucial for managing authentication and interacting with Supabase services in a type-safe manner.
+  // In summary, this TypeScript module sets up a Supabase client for a React project using Next.js. It imports necessary functions and types, 
+  // checks the configuration to determine if Supabase should be used for authentication, and conditionally creates and exports a Supabase client instance. 
+  // This approach ensures that the Supabase client is only created if it is needed, based on the project's configuration settings. 
+  // This setup is crucial for managing authentication and interacting with Supabase services in a type-safe manner.
+
+  // from supabaseClient.ts
+
+//   import { createClient } from '@supabase/supabase-js';
+
+// const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+// const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+// if (!supabaseUrl || !supabaseAnonKey) {
+//   throw new Error('Missing Supabase environment variables.');
+// }
+
+// export const supabase = createClient(supabaseUrl, supabaseAnonKey);
