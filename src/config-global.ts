@@ -138,4 +138,7 @@ export const CONFIG: ConfigValue = {
   },
 };
 
-// In summary, this TypeScript file defines a structured configuration object for a React project using Next.js. It imports necessary paths and package information, defines a type for the configuration structure, and then creates an instance of this configuration with values sourced from environment variables and the package.json file. This approach ensures that the application's configuration is centralized, type-safe, and easily maintainable.
+// In summary, this TypeScript file defines a structured configuration object for a React project using Next.js. 
+// It imports necessary paths and package information, defines a type for the configuration structure, 
+// and then creates an instance of this configuration with values sourced from environment variables and the package.json file. 
+// This approach ensures that the application's configuration is centralized, type-safe, and easily maintainable.
